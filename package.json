@@ -1,0 +1,83 @@
+{
+  "name": "autemdolore",
+  "version": "1.0.0",
+  "description": "A typescript implementation of the heatshrink compression library",
+  "main": "dist/heatshrink-ts.umd.js",
+  "module": "dist/heatshrink-ts.es5.js",
+  "typings": "dist/types/heatshrink-ts.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "CaesarAltenwerth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GaylordOsinski/autemdolore.git"
+  },
+  "license": "ISC",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs --outDir dist/lib && rollup -c rollup.config.ts && typedoc --name Heatshrink-TS --out dist/docs --target es6 --theme minimal --mode file src",
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --coverage --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverage": true,
+    "mapCoverage": true
+  },
+  "devDependencies": {
+    "@types/jest": "^22.0.0",
+    "@types/node": "^9.3.0",
+    "colors": "^1.1.2",
+    "coveralls": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "husky": "^0.14.0",
+    "jest": "^22.0.2",
+    "lint-staged": "^6.0.0",
+    "lodash.camelcase": "^4.3.0",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^3.0.0-beta.2",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.54.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.10.0",
+    "ts-jest": "^22.0.0",
+    "ts-node": "^4.1.0",
+    "tslint": "^5.8.0",
+    "tslint-config-prettier": "^1.1.0",
+    "tslint-config-standard": "^7.0.0",
+    "typedoc": "^0.10.0",
+    "typescript": "^2.6.2"
+  },
+  "homepage": "https://github.com/GaylordOsinski/autemdolore.git"
+}
